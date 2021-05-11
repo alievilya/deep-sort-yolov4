@@ -1,0 +1,21 @@
+{
+  "source": "data_files/in_1.mp4",
+  "source0": "rtsp://admin:admin@192.168.1.18:554/1/h264major",
+  "weights": "weights/best14x-49.pt",
+  "config_deepsort": "deep_sort_pytorch/configs/deep_sort.yaml",
+  "cfg": "cfg/csdarknet53s-panet-spp.cfg",
+  "needed_classes": "person",
+  "names": "data/coco.names",
+  "device": "0",
+  "classes": "None",
+  "fourcc": "mp4v",
+  "conf_thres": 0.3,
+  "img_size": 512,
+  "iou_thres": 0.6,
+  "output": "output",
+  "augment": "False",
+  "agnostic_nms": "False",
+  "half": "False",
+  "save_txt": "False",
+  "view_img": "False"
+}

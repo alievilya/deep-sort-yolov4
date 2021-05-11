@@ -3,26 +3,27 @@
 
 from __future__ import division, print_function, absolute_import
 
-from timeit import time
+import os
 import warnings
+from collections import OrderedDict
+from os.path import join
+from timeit import time
+
 import cv2
+import imutils.video
 import numpy as np
 import tensorflow as tf
-import os
 from PIL import Image
-from yolo import YOLO
 
-from deep_sort import preprocessing
 from deep_sort import nn_matching
+from deep_sort import preprocessing
 from deep_sort.detection import Detection
 from deep_sort.tracker import Tracker
-from tools import generate_detections as gdet
-import imutils.video
-from videocaptureasync import VideoCaptureAsync
-from os.path import join
-from collections import OrderedDict
-from draw_enter import select_object, read_door_info
+from draw_enter import read_door_info
 from rectangles import find_centroid, Rectangle, rect_square
+from tools import generate_detections as gdet
+from videocaptureasync import VideoCaptureAsync
+from yolo import YOLO
 
 config = tf.compat.v1.ConfigProto()
 config.gpu_options.allow_growth = True
@@ -121,7 +122,6 @@ def main(yolo):
     error_values = []
     check_gpu()
     files = sorted(os.listdir('data_files/videos'))
-
 
     for video_name in files:
         print("opening video: {}".format(video_name))
@@ -293,7 +293,6 @@ def main(yolo):
                         except ZeroDivisionError:
                             ratio = 0
 
-
                     # if vector_person < 0 then current coord is less than initialized, it means that man is going
                     # in the exit direction
                     if vector_person[1] > 70 and counter.people_init[val] == 2 \
@@ -313,7 +312,6 @@ def main(yolo):
 
                     counter.people_init[val] = -1
                     del val
-
 
             ins, outs = counter.show_counter()
             cv2.rectangle(frame, (0, 0), (250, 50),
