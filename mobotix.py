@@ -51,6 +51,7 @@ def find_ratio_ofbboxes(bbox, rect_compare):
 
 class Counter:
     def __init__(self, counter_in, counter_out, track_id):
+        self.frames_without_moves = 0
         self.fps = 3
         self.people_init = OrderedDict()
         self.people_bbox = OrderedDict()
@@ -129,10 +130,11 @@ def main(yolo):
     fpeses = []
 
     check_gpu()
-    video_name = 'test1.mp4'
+    video_name = 'test2.mp4'
 
     print("opening video: {}".format(video_name))
     file_path = join('data_files/videos', video_name)
+    # file_path = "rtsp://admin:admin@192.168.1.18:554/1/h264major"
     output_name = 'save_data/out_' + video_name[0:-3] + output_format
     counter = Counter(counter_in=0, counter_out=0, track_id=0)
 
